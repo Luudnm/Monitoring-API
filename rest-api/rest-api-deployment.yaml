@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-rest-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-rest-api
+  template:
+    metadata:
+      labels:
+        app: demo-rest-api
+    spec:
+      containers:
+      - name: demo-rest-api
+        image: demo-rest-api:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
