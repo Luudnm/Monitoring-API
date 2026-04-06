@@ -21,5 +21,8 @@ Op het minikube cluster te krijgen met de volgende commando's
       --set auth.database=appdb
 
 # Monitor-API
-De python applicatie die de status opvraagd van een rest api en een postgresSQL database
+De python applicatie die de status opvraagd van een Rest-API en een PostgresSQL database.
 
+    kubectl port-forward svc/monitor-api <port>:8000
+
+    curl localhost:8081/status
