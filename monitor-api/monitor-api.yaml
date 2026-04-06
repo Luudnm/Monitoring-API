@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitor-api
+  template:
+    metadata:
+      labels:
+        app: monitor-api
+    spec:
+      containers:
+      - name: monitor-api
+        image: monitor-api:latest
+        imagePullPolicy: Never
+        envFrom:
+          - configMapRef:
+              name: monitor-config
+          - secretRef:
+              name: monitor-secret
+        ports:
+          - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitor-api
+spec:
+  selector:
+    app: monitor-api
+  ports:
+    - port: 8000
+      targetPort: 8000
